@@ -8,8 +8,11 @@ This repository contains the working example for **[Ukey1 React SDK](https://git
 - Go to the root directory of the example and install all dependencies `npm install`
 - Get your Ukey1 `App ID` (for test environment) - from [Ukey1 Developer Console](https://ukey1.nooledge.com/dashboard/developer)
 - Set your `App ID` in [src/js/App.js](src/js/App.js) (search for const UKEY1_APP_ID)
-- Build your test app `npm run build`
-- Open your test app in the browser and let's try
+- Start your test app with `npm start` (or `npm run build`)
+
+## Credits
+
+This example is based on [create-react-app](https://github.com/facebookincubator/create-react-app).
 
 ## License
 

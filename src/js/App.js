@@ -9,8 +9,7 @@ const UKEY1_API_HOST = ''; // default host is used
 const UKEY1_APP_ID = 'your-app-id';
 
 const MODULE_UNAUTHORIZED = 1;
-const MODULE_AUTH_CALLBACK = 2;
-const MODULE_AUTHORIZED = 4;
+const MODULE_AUTHORIZED = 2;
 
 const STORAGE = 'testapp';
 
@@ -65,7 +64,7 @@ class App extends Component {
     let options = {
       host: UKEY1_API_HOST,
       appId: UKEY1_APP_ID,
-      returnUrl: URL + (URL.search(/\#/) >= 0 ? '' : '#') + '~auth~',
+      returnUrl: URL + (URL.search(/#/) >= 0 ? '' : '#') + '~auth~',
       scope: ['access_token', 'email', 'image'],
       signup: true
     };
