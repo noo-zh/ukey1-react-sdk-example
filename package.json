@@ -1,6 +1,6 @@
 {
   "name": "ukey1-react-sdk-example",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": "http://127.0.2.1/ukey1-react-sdk-example/build/",
   "devDependencies": {
@@ -12,7 +12,7 @@
     "react": "^15.4.2",
     "react-device-storage": "^1.0.0",
     "react-dom": "^15.4.2",
-    "ukey1-react-sdk": "^1.0.0"
+    "ukey1-react-sdk": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

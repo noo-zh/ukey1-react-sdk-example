@@ -4,9 +4,8 @@ import DeviceStorage from 'react-device-storage';
 import logo from '../media/logo.svg';
 import '../css/App.css';
 
-const URL = window.location.href;
-const UKEY1_API_HOST = ''; // default host is used
-const UKEY1_APP_ID = 'your-app-id';
+const URL = window.location.origin + window.location.pathname;
+const UKEY1_APP_ID = '';
 
 const MODULE_UNAUTHORIZED = 1;
 const MODULE_AUTHORIZED = 2;
@@ -27,7 +26,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.storage = new DeviceStorage().sessionStorage(); // sessionStorage only for debug, otherwise use localStorage :-)
+    this.storage = new DeviceStorage().sessionStorage();
     let data = this.storage.read(STORAGE);
 
     this.state = {
@@ -62,10 +61,9 @@ class App extends Component {
     e.preventDefault();
 
     let options = {
-      host: UKEY1_API_HOST,
       appId: UKEY1_APP_ID,
       returnUrl: URL + (URL.search(/#/) >= 0 ? '' : '#') + '~auth~',
-      scope: ['access_token', 'email', 'image'],
+      scope: ['firstname', 'image'],
       signup: true
     };
 
@@ -89,7 +87,6 @@ class App extends Component {
 
   authorizationEvent() {
     let options = {
-      host: UKEY1_API_HOST,
       appId: UKEY1_APP_ID,
       success: function (data, dataObj) {
         this.storage.save(STORAGE, data);
@@ -114,17 +111,23 @@ class App extends Component {
   }
 
   showImage() {
-    let image = this.state.storage.getImage();
+    let image = this.state.storage.image();
 
     if (image) {
-      return <img src={this.state.storage.getImage()} alt="" />;
+      return <img src={image} alt="" />;
     }
   }
 
   authorized() {
+    let firstname = this.state.storage.firstname();
+    
+    if (!firstname) {
+      firstname = '-- anonymous user --';
+    }
+    
     return (
       <p className="App-intro">
-        You are authorized, {this.state.storage.getForename()}!<br />
+        You are authorized, {firstname}!<br />
         {this.showImage()}<br />
         <a href="#" onClick={this.logoutEvent.bind(this)}>Logout</a>
       </p>
@@ -144,7 +147,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to Ukey1 playground written in React</h2>
         </div>
         {this.state.authorized ? this.authorized() : this.unauthorized()}
       </div>
